@@ -1,0 +1,19 @@
+const stockService = require("../service/stock.service");
+const errorTypes = require("../constants/error-type");
+
+const verifyStock = async (ctx, next) => {
+  const  { officeId, drugId, count } = ctx.request.body
+  const result = await stockService.getDurgStockInfo(officeId, drugId);
+  if (!result.length || result[0].drugCount < count) {
+    const error = new Error(errorTypes.STOCK_IS_NOT_ENOUGH);
+    return ctx.app.emit("error", error, ctx);
+  } 
+  await stockService.updateTableItem(result[0].id, {
+    drugCount: (result[0].drugCount - count)
+  })
+  await next();
+}
+
+module.exports = { 
+  verifyStock
+}
