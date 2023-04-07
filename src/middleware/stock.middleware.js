@@ -14,6 +14,18 @@ const verifyStock = async (ctx, next) => {
   await next();
 }
 
+const addStock = async (ctx, next) => {
+  const { officeId, drugId, count } = ctx.request.body;
+  const result = await stockService.getDurgStockInfo(officeId, drugId);
+  if (!result.length) {
+    await stockService.createTableItem({ officeId, drugId, drugCount: count });
+  } else {
+    await stockService.updateTableItem(result.id, { drugCount: count})
+  }
+  await next();
+}
+
 module.exports = { 
-  verifyStock
+  verifyStock,
+  addStock
 }

@@ -1,4 +1,4 @@
-const enterService = require("../service/Enter.service");
+const enterService = require("../service/enter.service");
 const CommonController = require("./common.controller");
 class EnterController extends CommonController {
   constructor() {
