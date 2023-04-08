@@ -5,6 +5,17 @@ class PrescriptionService extends CommonService {
   constructor() {
     super("prescription");
   }
+  async getAllDrugUseCount() {
+    const statement = `
+      SELECT drugId,name,SUM(count) as count
+      FROM prescription p
+      LEFT JOIN drug_info d 
+      ON p.drugId = d.id 
+      GROUP BY drugId
+    `
+    const [ result ] = await connection.execute(statement)
+    return result;
+  }
   async getPrescriptionInfo(officeId, queryInfo) {
     const { offset, size } = queryInfo;
     const statement = `

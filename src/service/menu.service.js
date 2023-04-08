@@ -15,5 +15,13 @@ class MenuService extends CommonService {
     const [ result ]  = await connection.execute(statement, []);
     return result;
   }
+  async getMenuListAllCount() {
+    const statement = `SELECT * FROM menu`;
+    const [ result ]  = await connection.execute(statement, []);
+    return {
+      count: 0,
+      list: result
+    };
+  }
 }
 module.exports = new MenuService();

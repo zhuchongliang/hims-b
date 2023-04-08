@@ -14,5 +14,10 @@ class MenuController extends CommonController {
     const result = await menuService.getMenuListAll();
     ctx.body = result;
   }
+  async getMenuListAllCount(ctx, next) {
+    const result = await menuService.getMenuListAllCount();
+    ctx.body = result;
+  }
+ 
 }
 module.exports = new MenuController();
