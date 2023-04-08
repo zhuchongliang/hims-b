@@ -17,5 +17,5 @@ const picturesResize = async function (ctx, next) {
   }
   await next();
 }
-const avatarHandler = avatarUpload.single("avatar");
+const avatarHandler = avatarUpload.single("file");
 module.exports = { avatarHandler,  picturesResize };

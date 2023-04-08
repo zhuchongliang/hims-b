@@ -20,7 +20,7 @@ const addStock = async (ctx, next) => {
   if (!result.length) {
     await stockService.createTableItem({ officeId, drugId, drugCount: count });
   } else {
-    await stockService.updateTableItem(result.id, { drugCount: count})
+    await stockService.updateTableItem(result[0].id, { drugCount: count + result[0].drugCount})
   }
   await next();
 }

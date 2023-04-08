@@ -50,7 +50,6 @@ const verifyAuth = async (ctx, next) => {
     const result = jwt.verify(token, PUBLIC_KEY, {
       algorithms: ["RS256"]
     })
-    
     ctx.user = result;
     const userInfo = await getUserById(result.id);
    //判断用户是否存在
@@ -64,13 +63,14 @@ const verifyAuth = async (ctx, next) => {
       const error = new Error(errorTypes.USER_IS_DISENABLE)
       return ctx.app.emit("error", error, ctx);
     }
-    await next();
   }
   catch (err) {
     //错误的token
+    console.log(err);
     const error = new Error(errorTypes.UNAUTHORIZATION)
     ctx.app.emit("error", error, ctx);
   }
+  await next();
 }
 const verifyPermission = (resourceType) => {
   return async function (ctx, next) {

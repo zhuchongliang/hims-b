@@ -15,7 +15,9 @@ async function vertifyUser(ctx, next) {
   await next();
 }
 async function handlePassword(ctx, next) {
-  ctx.request.body.pwd = md5password(ctx.request.body.pwd);
+  if (ctx.request.body.pwd) {
+    ctx.request.body.pwd = md5password(ctx.request.body.pwd);
+  }
   await next();
 }
 module.exports = { vertifyUser, handlePassword };

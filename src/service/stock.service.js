@@ -16,7 +16,7 @@ class StockService extends CommonService {
     const statement = `
       SELECT s.id, s.officeId, s.drugId, s.drugCount, d.name, s.createAt, s.updateAt  
       FROM office_stock s 
-      JOIN drug_info d
+      LEFT JOIN drug_info d
       ON s.drugId = d.id
       WHERE s.officeId = ? 
       LIMIT ?, ?

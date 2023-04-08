@@ -1,5 +1,5 @@
 const CommonService = require("./common.service");
-
+const connection = require("../app/database");
 class ReserveService extends CommonService { 
   constructor() {
     super("reserve");
@@ -8,7 +8,7 @@ class ReserveService extends CommonService {
     const statement = `
       SELECT * FROM reserve WHERE drugId = ?
     `
-    const [ result ] = await connenct.excute(statement, [ drugId ]);
+    const [ result ] = await connection.execute(statement, [ drugId + "" ]);
     return result;
   }
 }
