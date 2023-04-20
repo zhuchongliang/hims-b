@@ -10,7 +10,10 @@ class FileController {
     //将头像url保存到user表中
     const avatarUrl = `${APP_HOST}:${APP_PORT}/user/${userId}/avatar`
     const result = await userService.updateAvatarUrlById(userId, avatarUrl);
-    ctx.body = avatarUrl;
+    ctx.body = ctx.body = {
+      data: avatarUrl,
+      message: "头像上传成功"
+    };;
   }
 }
 module.exports = new FileController();

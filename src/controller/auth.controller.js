@@ -7,12 +7,15 @@ class autoContoller {
       expiresIn: 60 * 60 * 24,
       algorithm: "RS256"
     });
-    ctx.body = {
-      id,
-      name,
-      roleId,
-      officeId,
-      token
+    ctx.body =  ctx.body = {
+      message: "登录成功",
+      data: {
+        id,
+        name,
+        roleId,
+        officeId,
+        token
+      }
     };
   }
   async success(ctx, next) {

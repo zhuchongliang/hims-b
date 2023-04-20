@@ -11,7 +11,9 @@ class user extends CommonController {
   async create(ctx, next) {
     const userInfo = ctx.request.body;
     await userService.create(userInfo, next);
-    ctx.body = "注册成功！";
+    ctx.body = {
+      message: "注册成功"
+    };
   }
   async avatarInfo(ctx, next) {
     const { userId } = ctx.params;
