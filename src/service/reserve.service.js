@@ -11,5 +11,10 @@ class ReserveService extends CommonService {
     const [ result ] = await connection.execute(statement, [ drugId + "" ]);
     return result;
   }
+  async getDrugCountAmount() {
+    const statement = `SELECT sum(count) as number FROM reserve`
+    const [ result ] = await connection.execute(statement);
+    return result;
+  }
 }
 module.exports = new ReserveService();

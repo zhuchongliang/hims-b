@@ -24,5 +24,10 @@ class service extends CommonService {
     const [result] = await connection.execute(statement, [avatarUrl, userId]);
     return result;
   }
+  async getUserAmount() {
+    const statement = `SELECT count(*) as number FROM user`
+    const [ result ] = await connection.execute(statement);
+    return result;
+  }
 }
 module.exports = new service();

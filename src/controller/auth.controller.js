@@ -7,6 +7,7 @@ class autoContoller {
       expiresIn: 60 * 60 * 24,
       algorithm: "RS256"
     });
+    ctx.content = "登录";
     ctx.body =  ctx.body = {
       message: "登录成功",
       data: {
@@ -17,6 +18,7 @@ class autoContoller {
         token
       }
     };
+    await next();
   }
   async success(ctx, next) {
     ctx.body = "验证成功";

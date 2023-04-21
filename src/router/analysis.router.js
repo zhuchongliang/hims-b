@@ -6,4 +6,5 @@ const analysisRouter = new Router({
 })
 analysisRouter.get("/prescription", verifyAuth, analysisController.getAllDrugUseCount);
 analysisRouter.get("/purchase", verifyAuth, analysisController.getAllPurchaseCount);
+analysisRouter.get("/amount", verifyAuth, analysisController.getTopPanelData);
 module.exports = analysisRouter; 

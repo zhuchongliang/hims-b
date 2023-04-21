@@ -7,10 +7,20 @@ class RoleService extends CommonService {
   } 
   async getRoleList(queryInfo) {
     const statement = `
-      SELECT r.id, r.name, r.intro, r.createAt, r.updateAt, JSON_ARRAYAGG(a.menuId) menuList
+      SELECT r.id, r.name, r.intro, r.createAt, r.updateAt, JSON_ARRAYAGG(
+        JSON_OBJECT(
+          "id", m.id, 
+          "type", m.type, 
+          "parentId", m.parentId, 
+          "name", m.name, 
+          "url",m.url
+        )
+      ) menuList
       FROM role r
       LEFT JOIN authority a
       ON r.id = a.roleId
+      LEFT JOIN menu m
+      ON m.id = a.menuId
       GROUP BY r.id
       LIMIT ?, ?
     `
@@ -25,10 +35,20 @@ class RoleService extends CommonService {
   }
   async searchRoleList(keyword, queryInfo) {
     const statement = `
-      SELECT r.id, r.name, r.intro, r.createAt, r.updateAt, JSON_ARRAYAGG(a.menuId) menuList
+      SELECT r.id, r.name, r.intro, r.createAt, r.updateAt, JSON_ARRAYAGG(
+        JSON_OBJECT(
+          "id", m.id, 
+          "type", m.type, 
+          "parentId", m.parentId, 
+          "name", m.name, 
+          "url",m.url
+        )
+      ) menuList
       FROM role r
       LEFT JOIN authority a
       ON r.id = a.roleId
+      LEFT JOIN menu m
+      ON m.id = a.menuId
       WHERE CONCAT_WS("", r.id, r.name, r.intro) LIKE ?
       GROUP BY r.id
       LIMIT ?, ?

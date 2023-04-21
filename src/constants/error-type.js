@@ -6,6 +6,7 @@
   const UNAUTHORIZATION = "unauthorization";
   const UNPERMISSION = "unpermission";
   const STOCK_IS_NOT_ENOUGH = "stock_is_not_enough"
+  const RESERVE_IS_NOT_ENOUGH = "reserve_is_not_enough"
   module.exports = {
     USER_ALREADY_EXISTS,
     USER_IS_DISENABLE,
@@ -14,5 +15,6 @@
     PASSWORD_IS_INCORRECT,
     UNAUTHORIZATION,
     UNPERMISSION,
-    STOCK_IS_NOT_ENOUGH
+    STOCK_IS_NOT_ENOUGH,
+    RESERVE_IS_NOT_ENOUGH
   }

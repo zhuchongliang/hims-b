@@ -35,6 +35,10 @@ const errorHandle = (error, ctx) => {
       status = 503;
       message = "药房库存不足";
       break;
+    case errorTypes.RESERVE_IS_NOT_ENOUGH:
+      status = 503;
+      message = "药库库存不足";
+      break;
     default:
       status = 404;
       message = "NOT FOUND";
