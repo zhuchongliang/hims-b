@@ -3,6 +3,7 @@ const CommonController = require("./common.controller");
 const userService = require("../service/user.service");
 const fileService = require("../service/file.service");
 const { AVATAR_PATH } = require("../constants/file-path");
+const officeService = require("../service/office.service");
 class user extends CommonController {
   constructor() {
     const fieldList = ["id", "name", "roleId", "enable"];
@@ -24,7 +25,8 @@ class user extends CommonController {
   async getUserInfo(ctx, next) {
     const { id } = ctx.user;
     const result = await userService.getUserById(id);
-    ctx.body = result[0];
+    const result1 = await officeService.getUserOffice(id);
+    ctx.body = result1.length === 0 ? result[0] : { ...result[0], ...result1[0]};
   }
 }
 module.exports = new user();

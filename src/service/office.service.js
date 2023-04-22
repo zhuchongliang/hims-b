@@ -13,6 +13,11 @@ class OfficeService extends CommonService {
     const statement = `SELECT count(*) as number FROM drug_office`
     const [ result ] = await connection.execute(statement);
     return result;
+  }
+  async getOfficeOwner(id) {
+    const statement = `SELECT owner as userId FROM drug_office WHERE id = ?`
+    const [ result ] = await connection.execute(statement, [ id ]);
+    return result;
   } 
 }
 

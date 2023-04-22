@@ -15,7 +15,10 @@ async function vertifyUser(ctx, next) {
   await next();
 }
 async function handlePassword(ctx, next) {
-  if (ctx.request.body.pwd) {
+  const name = ctx.request.body.name;
+  const pwd = ctx.request.body.pwd;
+  const result = await getUserByName(name);
+  if (result.length === 0 || (pwd && pwd !== result[0].pwd)) {
     ctx.request.body.pwd = md5password(ctx.request.body.pwd);
   }
   await next();
